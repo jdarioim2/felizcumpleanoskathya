@@ -1,15 +1,19 @@
 /* --- ESTILOS GENERALES --- */
+* {
+    box-sizing: border-box; /* Evita que los márgenes rompan la pantalla en celulares */
+}
+
 body {
     margin: 0;
-    padding: 0;
-    height: 100vh;
+    padding: 30px 15px; /* Da un respiro arriba y a los lados */
+    min-height: 100vh; /* Permite que la página crezca si el texto es muy largo */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #ffe4ef;
     color: #cc7093;
     font-family: 'Pixelify Sans', sans-serif;
-    overflow: hidden;
+    overflow-x: hidden; /* Evita que la pantalla se mueva hacia los lados, pero permite bajar */
     text-align: center;
 }
 
@@ -25,13 +29,14 @@ button {
     background-color: #a84c71;
     color: white;
     border: none;
-    padding: 15px 40px;
+    padding: 15px 35px;
     font-family: 'Pixelify Sans', sans-serif;
     font-size: 1.5rem;
     border-radius: 12px;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(168, 76, 113, 0.4);
     animation: pulse 2s infinite;
+    max-width: 90%;
 }
 
 button:hover {
@@ -45,8 +50,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 600px;
-    padding: 20px;
+    max-width: 800px; /* Ancho cómodo para lectura en PC */
 }
 
 /* --- ANIMACIÓN DEL PASTEL --- */
@@ -54,20 +58,30 @@ button:hover {
     font-size: 6rem;
     opacity: 0;
     transform: translateY(50px) scale(0.5);
+    margin-bottom: 20px;
 }
 
 .cake-container.show {
     animation: popInCake 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* --- ANIMACIÓN DEL TEXTO --- */
+/* --- ANIMACIÓN DEL TEXTO CON FOTO DE FONDO --- */
 .message-container {
-    margin-top: 30px;
     font-family: 'Caveat', cursive;
     font-size: 2.2rem;
-    color: #8f3d5c;
+    color: #8f3d5c; /* Color del texto */
     line-height: 1.4;
     opacity: 0;
+    width: 100%;
+    
+    /* Fondo con foto de Kathya y filtro semitransparente para que se lea el texto */
+    background: linear-gradient(rgba(255, 240, 245, 0.85), rgba(255, 240, 245, 0.85)), url('kathya.jpeg');
+    background-size: cover;
+    background-position: center;
+    
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .message-container.show {
@@ -75,14 +89,14 @@ button:hover {
 }
 
 .signature {
-    margin-top: 20px;
+    margin-top: 30px;
     font-size: 1.8rem;
     text-align: right;
     display: block;
     color: #a84c71;
 }
 
-/* --- KEYFRAMES --- */
+/* --- KEYFRAMES (Animaciones) --- */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
@@ -98,4 +112,32 @@ button:hover {
 @keyframes fadeInText {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   📱 MODO CELULAR (RESPONSIVE)
+   Todo lo que esté aquí abajo solo aplica 
+   cuando la pantalla es pequeña (celulares)
+   ========================================= */
+@media (max-width: 768px) {
+    button {
+        font-size: 1.2rem;
+        padding: 12px 25px;
+    }
+
+    .cake-container {
+        font-size: 5rem;
+        margin-bottom: 10px;
+    }
+
+    .message-container {
+        font-size: 1.6rem; /* Letra más pequeña para que quepa todo el texto */
+        padding: 30px 20px; /* Menos espacio en los bordes internos */
+        border-radius: 15px;
+    }
+
+    .signature {
+        font-size: 1.4rem;
+        margin-top: 20px;
+    }
 }
